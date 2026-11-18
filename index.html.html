@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trinity Congregation – Congregational Assessment 2027</title>
+  <style>
+    :root {
+      --primary: #1a365d;
+      --accent: #2b6cb0;
+      --light: #f7fafc;
+      --border: #e2e8f0;
+      --text: #2d3748;
+      --success: #276749;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #edf2f7;
+      color: var(--text);
+      line-height: 1.55;
+      padding: 16px 10px 40px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a365d, #2b6cb0);
+      color: white;
+      padding: 28px 24px 24px;
+      text-align: center;
+    }
+
+    header .church {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    header h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    header .location {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      margin-bottom: 12px;
+    }
+
+    header .theme {
+      font-size: 0.88rem;
+      background: rgba(255,255,255,0.15);
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+
+    .form-body {
+      padding: 26px 22px 36px;
+    }
+
+    .intro {
+      background: #ebf8ff;
+      border-left: 4px solid var(--accent);
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+    }
+
+    .intro p { margin-bottom: 10px; }
+    .intro p:last-child { margin-bottom: 0; }
+
+    .section-title {
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 8px;
+      margin: 32px 0 20px;
+    }
+
+    .section-title:first-of-type { margin-top: 8px; }
+
+    .question {
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .question:last-child { border-bottom: none; }
+
+    .q-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .q-text {
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 8px;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 0.97rem;
+      background: white;
+    }
+
+    .options label:hover {
+      border-color: var(--accent);
+      background: #f0f7ff;
+    }
+
+    .options input[type="radio"],
+    .options input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .multi-note {
+      font-size: 0.88rem;
+      color: #4a5568;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.98rem;
+      resize: vertical;
+      transition: border-color 0.15s;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(43,108,176,0.15);
+    }
+
+    .open-item {
+      margin-bottom: 12px;
+    }
+
+    .open-item label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+
+    .submit-section {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 2px solid var(--border);
+      text-align: center;
+    }
+
+    button[type="submit"] {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 17px 48px;
+      font-size: 1.12rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 18px rgba(26,54,93,0.28);
+      letter-spacing: 0.3px;
+    }
+
+    button[type="submit"]:hover {
+      background: #153e75;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(26,54,93,0.35);
+    }
+
+    .closing {
+      margin-top: 40px;
+      padding: 22px 18px;
+      background: var(--light);
+      border-radius: 10px;
+      font-size: 0.93rem;
+      text-align: center;
+    }
+
+    .closing p { margin-bottom: 10px; }
+    .closing strong { color: var(--primary); }
+
+    .mottos {
+      margin-top: 18px;
+      font-size: 0.88rem;
+      color: #4a5568;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.85rem;
+      color: #718096;
+      background: #f7fafc;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 540px) {
+      header h1 { font-size: 1.25rem; }
+      .form-body { padding: 20px 14px 30px; }
+      .options label { padding: 9px 12px; font-size: 0.93rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="church">PRESBYTERIAN CHURCH OF GHANA</div>
+      <h1>Trinity Congregation</h1>
+      <div class="location">Tonsuom Estates, Sunyani</div>
+      <div class="theme">Congregational Assessment Questionnaire<br>Preparing Trinity Congregation for 2027</div>
+    </header>
+
+    <div class="form-body">
+      <div class="intro">
+        <p><strong>Theme:</strong> Evaluating Our Progress, Strengthening Our Foundation and Planning for Greater Impact.</p>
+        <p>As the year draws to a close, it is important for Trinity Congregation to evaluate its activities, achievements, challenges and overall performance. This questionnaire is designed to obtain honest feedback from members concerning the spiritual life, leadership, administration, ministries, programmes and development of the congregation.</p>
+        <p>The objective is not to find fault with anyone but to identify areas of strength, weaknesses and opportunities for improvement as we prepare for 2027.</p>
+        <p><strong>Instructions:</strong> Please answer all questions honestly. Select the option that best represents your opinion. Where necessary, provide additional comments. Responses will be treated confidentially and used for congregational development and planning.</p>
+      </div>
+
+      <!-- 
+        TO COLLECT RESPONSES:
+        1. Go to https://formspree.io and create a free account
+        2. Create a new form and copy the endpoint (https://formspree.io/f/xxxxxx)
+        3. Replace the action URL below with your endpoint
+      -->
+      <form action="https://formspree.io/f/mwlolazg" method="POST">
+
+        <!-- PART ONE -->
+        <div class="section-title">PART ONE: SPIRITUAL GROWTH AND WORSHIP</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">1</span> How would you assess the overall spiritual growth of Trinity Congregation in the past year?</div>
+          <div class="options">
+            <label><input type="radio" name="q1" value="Very good" required> Very good</label>
+            <label><input type="radio" name="q1" value="Good"> Good</label>
+            <label><input type="radio" name="q1" value="Satisfactory"> Satisfactory</label>
+            <label><input type="radio" name="q1" value="Poor"> Poor</label>
+            <label><input type="radio" name="q1" value="Very poor"> Very poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">2</span> How satisfied are you with the quality of preaching, teaching and biblical instruction in the congregation?</div>
+          <div class="options">
+            <label><input type="radio" name="q2" value="Very satisfied" required> Very satisfied</label>
+            <label><input type="radio" name="q2" value="Satisfied"> Satisfied</label>
+            <label><input type="radio" name="q2" value="Fairly satisfied"> Fairly satisfied</label>
+            <label><input type="radio" name="q2" value="Dissatisfied"> Dissatisfied</label>
+            <label><input type="radio" name="q2" value="Very dissatisfied"> Very dissatisfied</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">3</span> Do the congregational prayer meetings, Bible studies, fasting programmes and other spiritual activities meet your spiritual needs?</div>
+          <div class="options">
+            <label><input type="radio" name="q3" value="Always" required> Always</label>
+            <label><input type="radio" name="q3" value="Most of the time"> Most of the time</label>
+            <label><input type="radio" name="q3" value="Sometimes"> Sometimes</label>
+            <label><input type="radio" name="q3" value="Rarely"> Rarely</label>
+            <label><input type="radio" name="q3" value="Never"> Never</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">4</span> How would you assess the quality of our Sunday worship services, including music, time management, participation and general organization?</div>
+          <div class="options">
+            <label><input type="radio" name="q4" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q4" value="Very good"> Very good</label>
+            <label><input type="radio" name="q4" value="Good"> Good</label>
+            <label><input type="radio" name="q4" value="Fair"> Fair</label>
+            <label><input type="radio" name="q4" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <!-- PART TWO -->
+        <div class="section-title">PART TWO: LEADERSHIP AND ADMINISTRATION</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">5</span> How would you assess the effectiveness of the Minister, Presbyters and other congregational leaders in providing spiritual and administrative leadership?</div>
+          <div class="options">
+            <label><input type="radio" name="q5" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q5" value="Very good"> Very good</label>
+            <label><input type="radio" name="q5" value="Good"> Good</label>
+            <label><input type="radio" name="q5" value="Fair"> Fair</label>
+            <label><input type="radio" name="q5" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">6</span> Do you think congregational decisions, announcements and important information are communicated effectively to members?</div>
+          <div class="options">
+            <label><input type="radio" name="q6" value="Very effectively" required> Very effectively</label>
+            <label><input type="radio" name="q6" value="Effectively"> Effectively</label>
+            <label><input type="radio" name="q6" value="Fairly effectively"> Fairly effectively</label>
+            <label><input type="radio" name="q6" value="Ineffectively"> Ineffectively</label>
+            <label><input type="radio" name="q6" value="Very ineffectively"> Very ineffectively</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">7</span> Do you believe members have sufficient opportunities to contribute ideas, participate in decision-making and serve in the congregation?</div>
+          <div class="options">
+            <label><input type="radio" name="q7" value="Yes, definitely" required> Yes, definitely</label>
+            <label><input type="radio" name="q7" value="Yes, to some extent"> Yes, to some extent</label>
+            <label><input type="radio" name="q7" value="Not sure"> Not sure</label>
+            <label><input type="radio" name="q7" value="Very limited opportunities"> Very limited opportunities</label>
+            <label><input type="radio" name="q7" value="No"> No</label>
+          </div>
+        </div>
+
+        <!-- PART THREE -->
+        <div class="section-title">PART THREE: MEMBERSHIP AND CHURCH DEVELOPMENT</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">8</span> How would you assess the level of love, unity, fellowship and mutual support among members of Trinity Congregation?</div>
+          <div class="options">
+            <label><input type="radio" name="q8" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q8" value="Very good"> Very good</label>
+            <label><input type="radio" name="q8" value="Good"> Good</label>
+            <label><input type="radio" name="q8" value="Fair"> Fair</label>
+            <label><input type="radio" name="q8" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">9</span> How effective are our evangelism, visitation and follow-up activities in attracting new members and retaining existing ones?</div>
+          <div class="options">
+            <label><input type="radio" name="q9" value="Very effective" required> Very effective</label>
+            <label><input type="radio" name="q9" value="Effective"> Effective</label>
+            <label><input type="radio" name="q9" value="Fairly effective"> Fairly effective</label>
+            <label><input type="radio" name="q9" value="Ineffective"> Ineffective</label>
+            <label><input type="radio" name="q9" value="Not sure"> Not sure</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">10</span> Are the needs of children, youth, young adults, women, men and the elderly adequately addressed through our congregational programmes?</div>
+          <div class="options">
+            <label><input type="radio" name="q10" value="Yes, very adequately" required> Yes, very adequately</label>
+            <label><input type="radio" name="q10" value="Adequately"> Adequately</label>
+            <label><input type="radio" name="q10" value="Fairly adequately"> Fairly adequately</label>
+            <label><input type="radio" name="q10" value="Inadequately"> Inadequately</label>
+            <label><input type="radio" name="q10" value="Not at all"> Not at all</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">11</span> How would you assess the performance of the various congregational committees and groups in carrying out their responsibilities?</div>
+          <div class="options">
+            <label><input type="radio" name="q11" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q11" value="Very good"> Very good</label>
+            <label><input type="radio" name="q11" value="Good"> Good</label>
+            <label><input type="radio" name="q11" value="Fair"> Fair</label>
+            <label><input type="radio" name="q11" value="Poor"> Poor</label>
+            <label><input type="radio" name="q11" value="Not familiar with their activities"> Not familiar with their activities</label>
+          </div>
+        </div>
+
+        <!-- PART FOUR -->
+        <div class="section-title">PART FOUR: STEWARDSHIP, WELFARE AND INFRASTRUCTURE</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">12</span> How would you assess the congregation’s financial management, accountability and encouragement of members towards giving and stewardship?</div>
+          <div class="options">
+            <label><input type="radio" name="q12" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q12" value="Very good"> Very good</label>
+            <label><input type="radio" name="q12" value="Good"> Good</label>
+            <label><input type="radio" name="q12" value="Fair"> Fair</label>
+            <label><input type="radio" name="q12" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">13</span> What is your assessment of the congregation’s attention to members’ welfare, pastoral care, counselling, visitation and support during difficult times?</div>
+          <div class="options">
+            <label><input type="radio" name="q13" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q13" value="Very good"> Very good</label>
+            <label><input type="radio" name="q13" value="Good"> Good</label>
+            <label><input type="radio" name="q13" value="Fair"> Fair</label>
+            <label><input type="radio" name="q13" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">14</span> Which of the following areas should receive greater attention and investment in the coming year?</div>
+          <div class="multi-note">You may select up to three options.</div>
+          <div class="options">
+            <label><input type="checkbox" name="q14" value="Chapel dedication project"> Chapel dedication project</label>
+            <label><input type="checkbox" name="q14" value="Congregational bus project"> Congregational bus project</label>
+            <label><input type="checkbox" name="q14" value="Evangelism and congregational growth"> Evangelism and congregational growth</label>
+            <label><input type="checkbox" name="q14" value="Youth development and mentorship"> Youth development and mentorship</label>
+            <label><input type="checkbox" name="q14" value="Children’s ministry"> Children’s ministry</label>
+            <label><input type="checkbox" name="q14" value="Leadership and workers’ training"> Leadership and workers’ training</label>
+            <label><input type="checkbox" name="q14" value="Welfare and pastoral care"> Welfare and pastoral care</label>
+            <label><input type="checkbox" name="q14" value="Congregational infrastructure and equipment"> Congregational infrastructure and equipment</label>
+            <label><input type="checkbox" name="q14" value="Digital media and communication"> Digital media and communication</label>
+            <label><input type="checkbox" name="q14" value="Prayer and spiritual development"> Prayer and spiritual development</label>
+            <label><input type="checkbox" name="q14" value="Other priorities"> Other priorities</label>
+          </div>
+        </div>
+
+        <!-- PART FIVE -->
+        <div class="section-title">PART FIVE: MINISTRIES, PROGRAMMES AND SPIRITUAL ACTIVITIES</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">15</span> How would you assess the contribution and effectiveness of Echoes of Trinity in enhancing worship, evangelism and the spiritual life of the congregation?</div>
+          <div class="options">
+            <label><input type="radio" name="q15" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q15" value="Very good"> Very good</label>
+            <label><input type="radio" name="q15" value="Good"> Good</label>
+            <label><input type="radio" name="q15" value="Fair"> Fair</label>
+            <label><input type="radio" name="q15" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">16</span> How would you assess the effectiveness of the Media Team in handling sound, projection, announcements, photography and other media responsibilities?</div>
+          <div class="options">
+            <label><input type="radio" name="q16" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q16" value="Very good"> Very good</label>
+            <label><input type="radio" name="q16" value="Good"> Good</label>
+            <label><input type="radio" name="q16" value="Fair"> Fair</label>
+            <label><input type="radio" name="q16" value="Poor"> Poor</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">17</span> How helpful and effective is the live streaming of our congregational services in reaching members and people who cannot physically attend church?</div>
+          <div class="options">
+            <label><input type="radio" name="q17" value="Very effective" required> Very effective</label>
+            <label><input type="radio" name="q17" value="Effective"> Effective</label>
+            <label><input type="radio" name="q17" value="Fairly effective"> Fairly effective</label>
+            <label><input type="radio" name="q17" value="Not effective"> Not effective</label>
+            <label><input type="radio" name="q17" value="Not sure"> Not sure</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">18</span> How would you assess the Friday Prophetic Hour in terms of spiritual impact, prayer, participation and personal testimonies?</div>
+          <div class="options">
+            <label><input type="radio" name="q18" value="Very impactful" required> Very impactful</label>
+            <label><input type="radio" name="q18" value="Impactful"> Impactful</label>
+            <label><input type="radio" name="q18" value="Fairly impactful"> Fairly impactful</label>
+            <label><input type="radio" name="q18" value="Not impactful"> Not impactful</label>
+            <label><input type="radio" name="q18" value="I do not participate"> I do not participate</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">19</span> How would you assess the relevance and effectiveness of our Tuesday Bible Studies in promoting biblical understanding and spiritual maturity among members?</div>
+          <div class="options">
+            <label><input type="radio" name="q19" value="Very effective" required> Very effective</label>
+            <label><input type="radio" name="q19" value="Effective"> Effective</label>
+            <label><input type="radio" name="q19" value="Fairly effective"> Fairly effective</label>
+            <label><input type="radio" name="q19" value="Ineffective"> Ineffective</label>
+            <label><input type="radio" name="q19" value="I do not participate"> I do not participate</label>
+          </div>
+        </div>
+
+        <!-- PART SIX -->
+        <div class="section-title">PART SIX: THE WAY FORWARD</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">20</span> What three major changes, improvements or new initiatives would you recommend to make Trinity Congregation a stronger, more vibrant and growing congregation in 2027?</div>
+          <div class="open-item">
+            <label>1.</label>
+            <textarea name="q20_1" placeholder="First recommendation..." required></textarea>
+          </div>
+          <div class="open-item">
+            <label>2.</label>
+            <textarea name="q20_2" placeholder="Second recommendation..." required></textarea>
+          </div>
+          <div class="open-item">
+            <label>3.</label>
+            <textarea name="q20_3" placeholder="Third recommendation..." required></textarea>
+          </div>
+        </div>
+
+        <!-- SPECIAL PROGRAMMES -->
+        <div class="section-title">SPECIAL PROGRAMMES AND MEMBER CARE</div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">21</span> How would you assess the Monthly Day-Born Celebration programme in promoting fellowship, love, unity and appreciation of members celebrating their birthdays each month?</div>
+          <div class="options">
+            <label><input type="radio" name="q21" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="q21" value="Very good"> Very good</label>
+            <label><input type="radio" name="q21" value="Good"> Good</label>
+            <label><input type="radio" name="q21" value="Fair"> Fair</label>
+            <label><input type="radio" name="q21" value="Poor"> Poor</label>
+            <label><input type="radio" name="q21" value="I do not participate"> I do not participate</label>
+          </div>
+        </div>
+
+        <div class="question">
+          <div class="q-text"><span class="q-number">22</span> How would you assess the congregational Health Screening Programme in promoting the physical well-being and health awareness of members?</div>
+          <div class="options">
+            <label><input type="radio" name="q22" value="Very helpful" required> Very helpful</label>
+            <label><input type="radio" name="q22" value="Helpful"> Helpful</label>
+            <label><input type="radio" name="q22" value="Fairly helpful"> Fairly helpful</label>
+            <label><input type="radio" name="q22" value="Not helpful"> Not helpful</label>
+            <label><input type="radio" name="q22" value="I have not participated"> I have not participated</label>
+          </div>
+        </div>
+
+        <div class="submit-section">
+          <button type="submit">Submit Assessment</button>
+        </div>
+      </form>
+
+      <div class="closing">
+        <p><strong>Thank you</strong> for taking the time to participate in this assessment. Your honest contribution is important to the future of Trinity Congregation.</p>
+        <p>Our desire is to build a spiritually vibrant, united, growing and financially sustainable congregation where every member feels valued and has an opportunity to contribute.</p>
+        <p><strong>LET US EVALUATE OUR PROGRESS, LEARN FROM OUR EXPERIENCES AND MOVE FORWARD WITH A CLEAR VISION FOR 2027.</strong></p>
+
+        <div class="mottos">
+          <p><strong>TRINITY, THE FAMILY OF GOD!</strong> (Eph. 2:19)</p>
+          <p><strong>TRINITY, WE ARE BLESSED!</strong> (Eph. 1:3)</p>
+          <p><strong>TRINITY, WE ARE UNTOUCHABLE!</strong> (Zac. 12:3)</p>
+          <p style="margin-top:12px;"><em>TOGETHER WE GROW, TOGETHER WE SERVE, AND TOGETHER WE PROSPER!</em></p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Session, Trinity Congregation – Tonsuom Estates<br>
+      Presbyterian Church of Ghana
+    </footer>
+  </div>
+
+<script>
+  // Limit Question 14 to a maximum of three selections.
+  const priorityBoxes = document.querySelectorAll('input[name="q14"]');
+  priorityBoxes.forEach((box) => {
+    box.addEventListener('change', () => {
+      const selected = document.querySelectorAll('input[name="q14"]:checked');
+      if (selected.length > 3) {
+        box.checked = false;
+        alert('Please select no more than three priorities.');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
